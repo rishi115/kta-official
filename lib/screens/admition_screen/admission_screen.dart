@@ -93,6 +93,11 @@ class _AdmissionScreenState extends State<AdmissionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return Center(
+        child: CircularProgressIndicator(backgroundColor: Colors.white),
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text('Taekwondo Admission Form'),
@@ -393,6 +398,9 @@ class _AdmissionScreenState extends State<AdmissionScreen> {
                       // print('School Type: $_selectedSchoolType');
                       // print('School Name: $_schoolName');
                       // print("Profile Picture : $_profilePic");
+                      setState(() {
+                        isLoading = true;
+                      });
 
 // Get a reference to the storage service
                       final FirebaseStorage storage = FirebaseStorage.instance;
@@ -444,11 +452,15 @@ class _AdmissionScreenState extends State<AdmissionScreen> {
                           })
                           .then((value) => {
                                 print("User added"),
-                                Navigator.push(
+                                Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => LoginScreen()),
-                                )
+                                  (route) => false,
+                                ),
+                                setState(() {
+                                  isLoading = false;
+                                })
                               })
                           .catchError(
                               (error) => print("Failed to add user: $error"));
