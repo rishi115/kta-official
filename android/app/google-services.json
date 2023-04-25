@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "613026692136",
+    "project_id": "kta-official",
+    "storage_bucket": "kta-official.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613026692136:android:e96fd0d392ef6db8f0091d",
+        "android_client_info": {
+          "package_name": "com.example.kta_official"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "613026692136-ejt54oq2h1l2npar6rbsvvonmmm13dko.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKQPl5nHNhNv19YDfRUqQlHfSxUSx18GM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "613026692136-ejt54oq2h1l2npar6rbsvvonmmm13dko.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "613026692136-2bohecj6e6rr13333apki6v2on730h9q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.coder29.kta"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
