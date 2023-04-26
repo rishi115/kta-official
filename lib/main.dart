@@ -6,7 +6,6 @@ import 'package:kta_official/constants.dart';
 import 'package:kta_official/routes.dart';
 import 'package:kta_official/screens/splash_screen/splash_screen.dart';
 
-
 void main() async {
   // Initialize firebase
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,16 +32,24 @@ class MyApp extends StatelessWidget {
               GoogleFonts.sourceSansProTextTheme(Theme.of(context).textTheme)
                   .apply()
                   .copyWith(
-                      //  custom text for bodytext1
-                      bodyText1:
-                          TextStyle(
-                              color: kTextWhiteColor,
-                              fontSize: 35.0,
-                              fontWeight: FontWeight.bold),
-                      subtitle2: TextStyle(
-                          color: kTextWhiteColor,
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w300)),
+                    //  custom text for bodytext1
+                    bodyText1: TextStyle(
+                        color: kTextWhiteColor,
+                        fontSize: 35.0,
+                        fontWeight: FontWeight.bold),
+                    bodyText2: TextStyle(
+                      color: kTextWhiteColor,
+                      fontSize: 28.0,
+                    ),
+                    subtitle1: TextStyle(
+                        color: kTextWhiteColor,
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.w300),
+                    subtitle2: TextStyle(
+                        color: kTextWhiteColor,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.w300),
+                  ),
 
           // input decoration theme for all over the app
           inputDecorationTheme: InputDecorationTheme(
