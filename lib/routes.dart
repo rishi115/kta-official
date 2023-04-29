@@ -5,6 +5,7 @@ import 'package:kta_official/screens/admition_screen/admission_screen.dart';
 import 'package:kta_official/screens/home_screen/home_screen.dart';
 import 'package:kta_official/screens/login_screen/login_screen.dart';
 import 'package:kta_official/screens/splash_screen/splash_screen.dart';
+import 'package:kta_official/screens/admin_screen/adminattendance.dart';
 
 Map<String, WidgetBuilder> routes = {
   // all screens will be registered here
@@ -13,5 +14,9 @@ Map<String, WidgetBuilder> routes = {
   HomeScreen.routeName: (context) => HomeScreen(),
   AdmissionScreen.routeName: (context) => AdmissionScreen(),
   AdminScreen.routeName: (context) => AdminScreen(),
-  AdminDashboard.routeName: (context) => AdminDashboard()
+  AdminDashboard.routeName: (context) => AdminDashboard(),
+  AdminAttendance.routeName: (context) => AdminAttendance(),
+
+
+
 };

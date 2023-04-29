@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import "package:flutter/cupertino.dart";
+import 'package:flutter/cupertino.dart';
+import 'package:kta_official/screens/admin_screen/adminattendance.dart';
 
 class AdminDrawer extends StatefulWidget {
-  const AdminDrawer({super.key});
+  const AdminDrawer({Key? key}) : super(key: key);
 
   @override
   State<AdminDrawer> createState() => _AdminDrawerState();
@@ -15,23 +16,26 @@ class _AdminDrawerState extends State<AdminDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Container(
-        // color: ,
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: const [
-            DrawerHeader(
-              padding: EdgeInsets.zero,
-              child: UserAccountsDrawerHeader(
-                margin: EdgeInsets.zero,
-                accountName: Text("Raj padval"),
-                accountEmail: Text("rajpadval45@gmail.com"),
-                currentAccountPicture: CircleAvatar(
-                  backgroundImage: AssetImage("assets/images/kta_logo.jpg"),
-                ),
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          DrawerHeader(
+            padding: EdgeInsets.zero,
+            child: UserAccountsDrawerHeader(
+              margin: EdgeInsets.zero,
+              accountName: Text("Raj padval"),
+              accountEmail: Text("rajpadval45@gmail.com"),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: AssetImage("assets/images/kta_logo.jpg"),
               ),
             ),
-            ListTile(
+          ),
+          GestureDetector(
+            onTap: () {
+              // navigate to Fees screen
+              Navigator.pushNamed(context, AdminAttendance.routeName);
+            },
+            child: ListTile(
               leading: Icon(
                 CupertinoIcons.money_dollar,
                 color: Colors.black,
@@ -41,7 +45,13 @@ class _AdminDrawerState extends State<AdminDrawer> {
                 style: TextStyle(color: Colors.black, fontSize: 20),
               ),
             ),
-            ListTile(
+          ),
+          GestureDetector(
+            onTap: () {
+              // navigate to Registered Students screen
+              Navigator.pushNamed(context, '/registered_students');
+            },
+            child: ListTile(
               leading: Icon(
                 CupertinoIcons.profile_circled,
                 color: Colors.black,
@@ -51,7 +61,13 @@ class _AdminDrawerState extends State<AdminDrawer> {
                 style: TextStyle(color: Colors.black, fontSize: 20),
               ),
             ),
-            ListTile(
+          ),
+          GestureDetector(
+            onTap: () {
+              // navigate to Form Responses screen
+              Navigator.pushNamed(context, '/attendance');
+            },
+            child: ListTile(
               leading: Icon(
                 CupertinoIcons.arrow_up_doc_fill,
                 color: Colors.black,
@@ -61,17 +77,30 @@ class _AdminDrawerState extends State<AdminDrawer> {
                 style: TextStyle(color: Colors.black, fontSize: 20),
               ),
             ),
-            ListTile(
+          ),
+          GestureDetector(
+            onTap: () {
+              // navigate to Attendence screen
+
+              Navigator.pushNamed(context, AdminAttendance.routeName);
+            },
+            child: ListTile(
               leading: Icon(
                 CupertinoIcons.book,
                 color: Colors.black,
               ),
               title: Text(
-                "Attendence",
+                "Attendance",
                 style: TextStyle(color: Colors.black, fontSize: 20),
               ),
             ),
-            ListTile(
+          ),
+          GestureDetector(
+            onTap: () {
+              // navigate to Create Form screen
+              Navigator.pushNamed(context, '/attendance');
+            },
+            child: ListTile(
               leading: Icon(
                 CupertinoIcons.collections_solid,
                 color: Colors.black,
@@ -81,10 +110,9 @@ class _AdminDrawerState extends State<AdminDrawer> {
                 style: TextStyle(color: Colors.black, fontSize: 20),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
-    ;
   }
 }
