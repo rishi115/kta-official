@@ -37,17 +37,17 @@ class MyApp extends StatelessWidget {
                         color: kTextWhiteColor,
                         fontSize: 35.0,
                         fontWeight: FontWeight.bold),
-                    bodyText2: TextStyle(
-                      color: kTextWhiteColor,
-                      fontSize: 28.0,
-                    ),
+                    // bodyText2: TextStyle(
+                    //   color: kTextWhiteColor,
+                    //   fontSize: 28.0,
+                    // ),
                     subtitle1: TextStyle(
-                        color: kTextWhiteColor,
-                        fontSize: 22.0,
+                        color: kTextBlackColor,
+                        fontSize: 14.0,
                         fontWeight: FontWeight.w300),
                     subtitle2: TextStyle(
                         color: kTextWhiteColor,
-                        fontSize: 18.0,
+                        fontSize: 20.0,
                         fontWeight: FontWeight.w300),
                   ),
 

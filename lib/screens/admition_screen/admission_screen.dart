@@ -475,3 +475,9 @@ class _AdmissionScreenState extends State<AdmissionScreen> {
     );
   }
 }
+
+
+// ADMINSSION FORM 
+// ATTENDENCE 
+// MONTHLY FEE PAYMENT
+// DYNAMIC 
