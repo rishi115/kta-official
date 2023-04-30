@@ -18,6 +18,7 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> {
   List<String> _studentNames = [];
+  List<Map<String, dynamic>> _studentData = [];
   Map<String, bool> _attendanceStatus = {};
   late final List<String> _scopes;
   late final ServiceAccountCredentials _credentials;
@@ -55,12 +56,21 @@ class _DetailPageState extends State<DetailPage> {
     if (snapshot.docs.isNotEmpty) {
       final docs = snapshot.docs;
       List<String> names = [];
+      List<Map<String, dynamic>> data = [];
       for (var doc in docs) {
         names.add(doc['name']);
         _attendanceStatus[doc['name']] = false; // Initialize attendance status
+        Map<String, dynamic> studentData = {
+          'name': doc['name'],
+          'fees': doc['fees'],
+          'whatsappNum': doc['whatsappNum'],
+          // add other data fields as needed
+        };
+        data.add(studentData);
       }
       setState(() {
         _studentNames = names;
+        _studentData = data;
       });
     }
   }
@@ -164,8 +174,14 @@ class _DetailPageState extends State<DetailPage> {
 
                   print('Attendance data added to Google Sheet: $response');
 
-                  sendWhatsAppMessage(
-                      '+919769983083', 'You have paid the fees');
+                  if (_studentData.isNotEmpty) {
+                    String studentName = _studentData[0]['name'];
+                    int fees = _studentData[0]['fees'];
+                    String whatsappNum = _studentData[0]['whatsappNum'];
+                    String message =
+                        'Hi $studentName, you have paid ₹$fees as fees';
+                    sendWhatsAppMessage('+91${whatsappNum}', message);
+                  }
                 } catch (e) {
                   print('Failed to add attendance data to Google Sheet: $e');
                 }
