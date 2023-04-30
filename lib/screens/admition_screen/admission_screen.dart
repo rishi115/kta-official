@@ -9,6 +9,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:kta_official/screens/login_screen/login_screen.dart';
 import 'package:path/path.dart' as PATH;
 import 'package:bcrypt/bcrypt.dart';
+import 'dart:math';
+
 // Create a reference to the Firestore collection
 
 class AdmissionScreen extends StatefulWidget {
@@ -367,14 +369,16 @@ class _AdmissionScreenState extends State<AdmissionScreen> {
                       },
                       child: Text('Pick image from gallery'),
                     ),
-                    TextButton(
-                      onPressed: () {
-                        // take image from camera
-                        _pickImage(ImageSource.camera);
-                      },
-                      child: img
-                          ? Text(_profilePic.toString())
-                          : Text('Take image from camera'),
+                    SingleChildScrollView(
+                      child: TextButton(
+                        onPressed: () {
+                          // take image from camera
+                          _pickImage(ImageSource.camera);
+                        },
+                        child: img
+                            ? Text("Image selected")
+                            : Text('Take image from camera'),
+                      ),
                     ),
                     const SizedBox(height: 20),
                   ],
@@ -402,38 +406,39 @@ class _AdmissionScreenState extends State<AdmissionScreen> {
                         isLoading = true;
                       });
 
-// Get a reference to the storage service
+                      // Get a reference to the storage service
                       final FirebaseStorage storage = FirebaseStorage.instance;
 
-// Get the filename without the extension
+                      // Get the filename without the extension
                       final String basename =
                           PATH.basenameWithoutExtension(_profilePic.path);
 
-// Create a reference to the file in Firebase Storage
+                      // Create a reference to the file in Firebase Storage
                       final Reference ref =
                           storage.ref().child('profilePics/$basename.jpg');
 
-// Upload the file to Firebase Storage
+                      // Upload the file to Firebase Storage
                       final TaskSnapshot task = await ref.putFile(_profilePic);
 
-// Get the download URL of the uploaded file
+                      // Get the download URL of the uploaded file
                       final String downloadUrl =
                           await task.ref.getDownloadURL();
                       print("downloadUrl is : $downloadUrl");
 
-// Hashing passwords before sending it to the database
+                      // Hashing passwords before sending it to the database
                       final String hashedPassword = await BCrypt.hashpw(
                           _password, "\$2b\$12\$3T8eXjYmSnyVCaRzRZQI8u");
-// Create a reference to the collection in Firestore
+
+                      // Create a reference to the collection in Firestore
                       final CollectionReference usersCollection =
                           FirebaseFirestore.instance
                               .collection('RegisteredStudents');
 
-// Creating a document with user name
+                      // Creating a document with user name
                       final DocumentReference userDoc =
                           usersCollection.doc(_phone);
 
-// Add a new document with the fields, including the download URL of the profile picture
+                      // Add a new document with the fields, including the download URL of the profile picture
                       userDoc
                           .set({
                             'name': _name,
@@ -449,6 +454,8 @@ class _AdmissionScreenState extends State<AdmissionScreen> {
                             'selectedSchoolType': _selectedSchoolType,
                             'schoolName': _schoolName,
                             'profilePic': downloadUrl,
+                            'id': DateTime.now().millisecondsSinceEpoch * 1000 +
+                                Random().nextInt(1000),
                           })
                           .then((value) => {
                                 print("User added"),
@@ -477,7 +484,7 @@ class _AdmissionScreenState extends State<AdmissionScreen> {
 }
 
 
-// ADMINSSION FORM 
-// ATTENDENCE 
-// MONTHLY FEE PAYMENT
-// DYNAMIC 
+  // ADMINSSION FORM 
+  // ATTENDENCE 
+  // MONTHLY FEE PAYMENT
+  // DYNAMIC 

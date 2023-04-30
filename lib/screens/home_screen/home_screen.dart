@@ -1,13 +1,36 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 import 'package:kta_official/constants.dart';
 
 class HomeScreen extends StatelessWidget {
   static String routeName = "HomeScreen";
+  final String name;
+  final String email;
+  final String phone;
+  final String age;
+  final Timestamp joiningDate;
+  final String profilePic;
+  final String selectedBranch;
+  final int id;
+  HomeScreen(
+      {required this.name,
+      required this.email,
+      required this.phone,
+      required this.age,
+      required this.joiningDate,
+      required this.profilePic,
+      required this.selectedBranch,
+      required this.id});
 
   @override
   Widget build(BuildContext context) {
+    final DateTime jDate = DateTime.fromMillisecondsSinceEpoch(
+        joiningDate.seconds * 1000 + joiningDate.nanoseconds ~/ 1000000);
+    final String formattedDate = DateFormat('dd-MM-yyyy').format(jDate);
+
     return Scaffold(
       body: Column(
         children: [
@@ -30,17 +53,21 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             Text(
                               "Hi",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle1!
-                                  .copyWith(fontWeight: FontWeight.w200),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w100,
+                                  color: Colors.white,
+                                  fontSize: 20),
+                            ),
+                            SizedBox(
+                              width: 5,
                             ),
                             Text(
-                              "Raj",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle1!
-                                  .copyWith(fontWeight: FontWeight.w500),
+                              name,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
                             ),
                           ],
                         ),
@@ -48,7 +75,17 @@ class HomeScreen extends StatelessWidget {
                           height: kDefaultPadding / 2,
                         ),
                         Text(
-                          'Class X-II A | Roll no:12',
+                          '$email',
+                          style:
+                              Theme.of(context).textTheme.subtitle2!.copyWith(
+                                    fontSize: 14.0,
+                                  ),
+                        ),
+                        SizedBox(
+                          height: kDefaultPadding / 4,
+                        ),
+                        Text(
+                          '$phone',
                           style:
                               Theme.of(context).textTheme.subtitle2!.copyWith(
                                     fontSize: 14.0,
@@ -67,7 +104,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           child: Center(
                             child: Text(
-                              '2022-23',
+                              "DOJ : $formattedDate",
                               style: TextStyle(
                                   fontSize: 12.0,
                                   color: kTextBlackColor,
@@ -88,8 +125,7 @@ class HomeScreen extends StatelessWidget {
                         minRadius: 50.0,
                         maxRadius: 50.0,
                         backgroundColor: kSecondaryColor,
-                        backgroundImage:
-                            AssetImage('assets/images/kta_logo.jpg'),
+                        backgroundImage: NetworkImage(profilePic),
                       ),
                     ),
                   ],

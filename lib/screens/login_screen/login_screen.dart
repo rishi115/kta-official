@@ -266,9 +266,21 @@ class _LoginScreenState extends State<LoginScreen> {
         if (isPasswordCorrect) {
           print("User logged in");
           // Navigate to the next screen after successful login
-          Navigator.push(
+          // Pass user data to the HomeScreen after successful login
+
+          Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),
+            MaterialPageRoute(
+                builder: (context) => HomeScreen(
+                    name: userDoc.get('name'),
+                    email: userDoc.get('email'),
+                    phone: userDoc.get('phone'),
+                    age: userDoc.get('age'),
+                    profilePic: userDoc.get('profilePic'),
+                    joiningDate: userDoc.get('joiningDate'),
+                    selectedBranch: userDoc.get('selectedBranch'),
+                    id: userDoc.get("id"))),
+            (route) => false,
           );
         } else {
           print("Incorrect password");
