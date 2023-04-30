@@ -30,11 +30,10 @@ class ListItemCard extends StatelessWidget {
           decoration: BoxDecoration(color: Colors.white),
           child: ListTile(
             contentPadding:
-            EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             title: Text(
               item.title,
-              style:
-              TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
             trailing: Icon(Icons.arrow_forward_ios),
           ),

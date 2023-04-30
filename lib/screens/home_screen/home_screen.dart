@@ -15,6 +15,7 @@ class HomeScreen extends StatelessWidget {
   final String profilePic;
   final String selectedBranch;
   final int id;
+  final int fees;
   HomeScreen(
       {required this.name,
       required this.email,
@@ -23,7 +24,8 @@ class HomeScreen extends StatelessWidget {
       required this.joiningDate,
       required this.profilePic,
       required this.selectedBranch,
-      required this.id});
+      required this.id,
+      required this.fees});
 
   @override
   Widget build(BuildContext context) {
@@ -189,7 +191,7 @@ class HomeScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
-                              "Fees Due",
+                              "My Fees",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText2!
@@ -199,7 +201,7 @@ class HomeScreen extends StatelessWidget {
                                       fontWeight: FontWeight.w800),
                             ),
                             Text(
-                              '600\$',
+                              '₹$fees',
                               style: Theme.of(context)
                                   .textTheme
                                   .subtitle2!

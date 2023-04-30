@@ -22,7 +22,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
         ),
       ),
       body: Container(),
-      drawer: AdminDrawer(),
+      drawer: const AdminDrawer(),
     );
   }
 }

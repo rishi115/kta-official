@@ -18,6 +18,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   //validate our form now
+  bool changeButton = false;
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _emailController = TextEditingController();
@@ -34,6 +35,16 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formKey.currentState!.validate()) {
       // If the form is valid, call a function to validate the email and password
       _validateUser(_emailController.text, _passwordController.text);
+    }
+  }
+
+  moveToHome(BuildContext context) async {
+    // if all the fields are validated then this block will run
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        changeButton = true;
+      });
+      _submitForm();
     }
   }
 
@@ -113,17 +124,32 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(
                             height: kDefaultPadding,
                           ),
-                          DefaultButton(
-                            onPress: () {
-                              _submitForm();
-                              // if (_formKey.currentState!.validate()) {
-                              //   //  go to next activity
-                              //   // Navigator.pushNamedAndRemoveUntil(context,
-                              //   //     HomeScreen.routeName, (route) => false);
-                              // }
-                            },
-                            title: "SIGN IN",
-                            iconData: Icons.arrow_forward_outlined,
+                          Material(
+                            color: Colors.blueAccent,
+                            borderRadius:
+                                BorderRadius.circular(changeButton ? 50 : 8),
+                            child: InkWell(
+                              splashColor: Colors.blue,
+                              onTap: () => moveToHome(context),
+                              child: AnimatedContainer(
+                                duration: const Duration(seconds: 1),
+                                width: changeButton ? 50 : 200,
+                                height: 50,
+                                alignment: Alignment.center,
+                                child: changeButton
+                                    ? const Icon(
+                                        Icons.done,
+                                        color: Colors.white,
+                                      )
+                                    : const Text(
+                                        "Login",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18),
+                                      ),
+                              ),
+                            ),
                           ),
                           SizedBox(
                             height: kDefaultPadding,
@@ -163,10 +189,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all<Color>(
-                                          Colors.blue),
+                                          Colors.white),
                                   foregroundColor:
                                       MaterialStateProperty.all<Color>(
-                                          Colors.white),
+                                          Colors.black),
                                   padding: MaterialStateProperty.all<
                                       EdgeInsetsGeometry>(
                                     EdgeInsets.symmetric(
@@ -267,21 +293,22 @@ class _LoginScreenState extends State<LoginScreen> {
           print("User logged in");
           // Navigate to the next screen after successful login
           // Pass user data to the HomeScreen after successful login
-
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (context) => HomeScreen(
-                    name: userDoc.get('name'),
-                    email: userDoc.get('email'),
-                    phone: userDoc.get('phone'),
-                    age: userDoc.get('age'),
-                    profilePic: userDoc.get('profilePic'),
-                    joiningDate: userDoc.get('joiningDate'),
-                    selectedBranch: userDoc.get('selectedBranch'),
-                    id: userDoc.get("id"))),
-            (route) => false,
-          );
+          await Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => HomeScreen(
+                      name: userDoc.get('name'),
+                      email: userDoc.get('email'),
+                      phone: userDoc.get('phone'),
+                      age: userDoc.get('age'),
+                      profilePic: userDoc.get('profilePic'),
+                      joiningDate: userDoc.get('joiningDate'),
+                      selectedBranch: userDoc.get('selectedBranch'),
+                      id: userDoc.get("id"),
+                      fees: userDoc.get("fees"))));
+          setState(() {
+            changeButton = false;
+          });
         } else {
           print("Incorrect password");
           // Show an error message to the user

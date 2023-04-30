@@ -34,6 +34,7 @@ class _AdmissionScreenState extends State<AdmissionScreen> {
       _schoolName,
       _whatsappNum,
       _selectedSchoolType;
+  late int _selectedFee;
   late DateTime _selectedDate, _joiningDate;
   late File _profilePic;
   late bool img = false;
@@ -55,15 +56,73 @@ class _AdmissionScreenState extends State<AdmissionScreen> {
     'Prabhadevi ( All rounder activity center)',
     'Fellowship ( Monday and Wednesday)',
     'Goregaon ( Kids Paradise)',
-    'Plaza Height ( Grant road)',
     'Thane Studio ( Tuesday and Thursday)',
     'Airoli ( Body Vision Fitness)',
     'Klay Prep School ( Kalina East)',
     'Radiant Minds ( Chembur)',
     'Omkar Ved ( Parel)',
     'Cassi Mehta Malbar Hil ( Monday and Wednesday)',
-    'Varsha gulmohar ( Juhu)'
+    'Varsha gulmohar ( Juhu)',
+    'Ajmera Bhakti Park ( Wednesday and Friday )',
+    'Andheri Lokhandwala',
+    'Kharghar',
+    "Byculla"
   ];
+
+  final Map<String, int> _branchFees = {
+    'Personal Class': 0,
+    'Fellowship School': 1000,
+    'Sewri Koilwada': 500,
+    'B.P.K Sahakari School': 1000,
+    'Vanita Vishram': 1000,
+    'Thane Studio ( Saturday and Sunday)': 1000,
+    'Runwal Batch 01': 700,
+    'Runwal Batch 02': 700,
+    'Makhija Royale, Khar': 2500,
+    'Bandup': 800,
+    'Prabhadevi ( All rounder activity center)': 1600,
+    'Fellowship ( Monday and Wednesday)': 1000,
+    'Goregaon ( Kids Paradise)': 1000,
+    'Thane Studio ( Tuesday and Thursday)': 1000,
+    'Airoli ( Body Vision Fitness)': 1000,
+    'Klay Prep School ( Kalina East)': 2000,
+    'Radiant Minds ( Chembur)': 2000,
+    'Omkar Ved ( Parel)': 3000,
+    'Cassi Mehta Malbar Hil ( Monday and Wednesday)': 1000,
+    'Varsha gulmohar ( Juhu)': 3000,
+    'Ajmera Bhakti Park ( Wednesday and Friday )': 2500,
+    'Andheri Lokhandwala': 2500,
+    'Kharghar': 1500,
+    "Byculla ": 1000
+    // Add more branches and fees as needed
+  };
+  final List<int> _fees = [
+    0,
+    1000,
+    500,
+    1000,
+    1000,
+    1000,
+    700,
+    700,
+    2500,
+    800,
+    1600,
+    1000,
+    1000,
+    1000,
+    1000,
+    2000,
+    2000,
+    3000,
+    1000,
+    3000,
+    2500,
+    2500,
+    1500,
+    1000
+  ];
+
   final List<String> _genders = ['Male', 'Female', 'Other'];
   final List<String> _schoolTypes = [
     'SSC',
@@ -90,11 +149,13 @@ class _AdmissionScreenState extends State<AdmissionScreen> {
     super.initState();
     _selectedBranch = _branches[0];
     _selectedGender = _genders[0];
+    _selectedFee = _fees[0];
     _selectedSchoolType = _schoolTypes[0];
   }
 
   @override
   Widget build(BuildContext context) {
+    print("${_branches.length} ${_fees.length}");
     if (isLoading) {
       return Center(
         child: CircularProgressIndicator(backgroundColor: Colors.white),
@@ -280,6 +341,7 @@ class _AdmissionScreenState extends State<AdmissionScreen> {
                   onChanged: (value) {
                     setState(() {
                       _selectedBranch = value!;
+                      _selectedFee = _branchFees[value]!;
                     });
                   },
                   decoration: InputDecoration(
@@ -398,6 +460,7 @@ class _AdmissionScreenState extends State<AdmissionScreen> {
                       // print('Age: $_age');
                       // print('gender: $_selectedGender');
                       // print('Branch: $_selectedBranch');
+                      // print('Fee: $_selectedFee');
                       // print('JoiningDate: $_joiningDate');
                       // print('School Type: $_selectedSchoolType');
                       // print('School Name: $_schoolName');
@@ -426,7 +489,7 @@ class _AdmissionScreenState extends State<AdmissionScreen> {
                       print("downloadUrl is : $downloadUrl");
 
                       // Hashing passwords before sending it to the database
-                      final String hashedPassword = await BCrypt.hashpw(
+                      final String hashedPassword = BCrypt.hashpw(
                           _password, "\$2b\$12\$3T8eXjYmSnyVCaRzRZQI8u");
 
                       // Create a reference to the collection in Firestore
@@ -454,6 +517,7 @@ class _AdmissionScreenState extends State<AdmissionScreen> {
                             'selectedSchoolType': _selectedSchoolType,
                             'schoolName': _schoolName,
                             'profilePic': downloadUrl,
+                            'fees': _selectedFee,
                             'id': DateTime.now().millisecondsSinceEpoch * 1000 +
                                 Random().nextInt(1000),
                           })
