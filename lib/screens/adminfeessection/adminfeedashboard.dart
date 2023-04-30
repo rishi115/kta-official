@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:kta_official/screens/adminfeessection/adiminfeessheet.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ListItem {
   final String title;
@@ -128,7 +129,21 @@ class AdminFees extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Fees Section'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () async {
+              const url = 'https://docs.google.com/spreadsheets/u/4/d/1jEnZKIZlnMC9YRWc05h_xT9ihgfxJmNYlZdFMXfABX4/edit?ouid=106446411387831082951&usp=sheets_home&ths=true'; // Replace with your URL
+              if (await canLaunch(url)) {
+                await launch(url);
+              } else {
+                throw 'Could not launch $url';
+              }
+            },
+          ),
+        ],
       ),
+
       body: ListView.builder(
         itemCount: items.length,
         itemBuilder: (BuildContext context, int index) {

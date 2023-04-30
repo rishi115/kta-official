@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kta_official/screens/admin_screen/attendancesheet.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ListItem {
   final String title;
@@ -126,7 +127,20 @@ class AdminAttendance extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Attandance Section'),
+        title: Text('Atendance Section'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () async {
+              const url = 'https://docs.google.com/spreadsheets/d/1yRrdy7WTMSIlPOCpCb3ZWx2scE-TjrhYPtQJMi_QS30/edit#gid=1947797724'; // Replace with your URL
+              if (await canLaunch(url)) {
+                await launch(url);
+              } else {
+                throw 'Could not launch $url';
+              }
+            },
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: items.length,
