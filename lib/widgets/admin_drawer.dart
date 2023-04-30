@@ -51,7 +51,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
           GestureDetector(
             onTap: () {
               // navigate to Registered Students screen
-              Navigator.pushNamed(context,  Registers.routeName);
+              Navigator.pushNamed(context, Registers.routeName);
             },
             child: ListTile(
               leading: Icon(
@@ -60,22 +60,6 @@ class _AdminDrawerState extends State<AdminDrawer> {
               ),
               title: Text(
                 "Registered Students",
-                style: TextStyle(color: Colors.black, fontSize: 20),
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              // navigate to Form Responses screen
-              Navigator.pushNamed(context, '/attendance');
-            },
-            child: ListTile(
-              leading: Icon(
-                CupertinoIcons.arrow_up_doc_fill,
-                color: Colors.black,
-              ),
-              title: Text(
-                "Form Responses",
                 style: TextStyle(color: Colors.black, fontSize: 20),
               ),
             ),
@@ -93,22 +77,6 @@ class _AdminDrawerState extends State<AdminDrawer> {
               ),
               title: Text(
                 "Attendance",
-                style: TextStyle(color: Colors.black, fontSize: 20),
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              // navigate to Create Form screen
-              Navigator.pushNamed(context, '/attendance');
-            },
-            child: ListTile(
-              leading: Icon(
-                CupertinoIcons.collections_solid,
-                color: Colors.black,
-              ),
-              title: Text(
-                "Create Form",
                 style: TextStyle(color: Colors.black, fontSize: 20),
               ),
             ),
