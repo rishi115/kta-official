@@ -64,12 +64,20 @@ class HomeScreen extends StatelessWidget {
                               width: 5,
                             ),
                             Text(
+<<<<<<< HEAD
                               name,
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 color: Colors.white,
                                 fontSize: 20,
                               ),
+=======
+                              "Rishi",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(fontWeight: FontWeight.w500),
+>>>>>>> a91bfc7c8bf485d113a05ae8b479884211de8273
                             ),
                           ],
                         ),
@@ -243,7 +251,9 @@ class HomeScreen extends StatelessWidget {
                             icon: 'assets/icons/ask.svg',
                             title: 'New Events'),
                         HomeCard(
-                            onPress: () {},
+                            onPress: () {
+
+                            },
                             icon: "assets/icons/indianRupeeNote.svg",
                             title: 'Fees'),
                       ],

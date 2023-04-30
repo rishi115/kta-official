@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kta_official/screens/admin_screen/attendancesheet.dart';
+import 'package:kta_official/screens/adminregistration/registeredstudents.dart';
+
+
 
 class ListItem {
   final String title;
@@ -19,7 +21,7 @@ class ListItemCard extends StatelessWidget {
         // Navigate to the page you want to display when the card is tapped.
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Detailscreen(item: item)),
+          MaterialPageRoute(builder: (context) => Studentdetails(item: item)),
         );
       },
       child: Card(
@@ -43,8 +45,8 @@ class ListItemCard extends StatelessWidget {
   }
 }
 
-class AdminAttendance extends StatelessWidget {
-  static const String routeName = '/admin-attendance';
+class Registers extends StatelessWidget {
+  static const String routeName = '/admin-fees';
   final List<ListItem> items = [
     ListItem(
       title: 'Personal Class',
@@ -126,7 +128,7 @@ class AdminAttendance extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Attandance Section'),
+        title: Text('Registered Students'),
       ),
       body: ListView.builder(
         itemCount: items.length,

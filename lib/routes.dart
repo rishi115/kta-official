@@ -2,7 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:kta_official/screens/admin_screen/admin_dashboard.dart';
 import 'package:kta_official/screens/admin_screen/admin_screen.dart';
 import 'package:kta_official/screens/admin_screen/adminattendance.dart';
+<<<<<<< HEAD
 import 'package:kta_official/screens/adminfeessection/adminfeedashboard.dart';
+=======
+import 'package:kta_official/screens/adminregistration/adminregistration.dart';
+>>>>>>> a91bfc7c8bf485d113a05ae8b479884211de8273
 import 'package:kta_official/screens/admition_screen/admission_screen.dart';
 import 'package:kta_official/screens/login_screen/login_screen.dart';
 import 'package:kta_official/screens/splash_screen/splash_screen.dart';
@@ -17,5 +21,13 @@ Map<String, WidgetBuilder> routes = {
   AdminScreen.routeName: (context) => AdminScreen(),
   AdminDashboard.routeName: (context) => AdminDashboard(),
   AdminAttendance.routeName: (context) => AdminAttendance(),
+<<<<<<< HEAD
   AdminFees.routeName: (context) => AdminFees(),
+=======
+  AdminFees.routeName: (context) =>AdminFees(),
+  Registers.routeName: (context) =>Registers(),
+
+
+
+>>>>>>> a91bfc7c8bf485d113a05ae8b479884211de8273
 };
