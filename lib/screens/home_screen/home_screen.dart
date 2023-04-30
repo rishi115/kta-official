@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
                                   .copyWith(fontWeight: FontWeight.w200),
                             ),
                             Text(
-                              "Raj",
+                              "Rishi",
                               style: Theme.of(context)
                                   .textTheme
                                   .subtitle1!
@@ -205,7 +205,9 @@ class HomeScreen extends StatelessWidget {
                             icon: 'assets/icons/ask.svg',
                             title: 'New Events'),
                         HomeCard(
-                            onPress: () {},
+                            onPress: () {
+
+                            },
                             icon: "assets/icons/indianRupeeNote.svg",
                             title: 'Fees'),
                       ],
