@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:kta_official/screens/admin_screen/adminattendance.dart';
 import 'package:kta_official/screens/adminfeessection/adminfeedashboard.dart';
+import 'package:kta_official/screens/adminregistration/adminregistration.dart';
 
 class AdminDrawer extends StatefulWidget {
   const AdminDrawer({Key? key}) : super(key: key);
@@ -50,7 +51,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
           GestureDetector(
             onTap: () {
               // navigate to Registered Students screen
-              Navigator.pushNamed(context, '/registered_students');
+              Navigator.pushNamed(context,  Registers.routeName);
             },
             child: ListTile(
               leading: Icon(
