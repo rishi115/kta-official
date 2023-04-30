@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:kta_official/screens/admin_screen/adminattendance.dart';
+import 'package:kta_official/screens/adminfeessection/adminfeedashboard.dart';
 
 class AdminDrawer extends StatefulWidget {
   const AdminDrawer({Key? key}) : super(key: key);
@@ -33,7 +34,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
           GestureDetector(
             onTap: () {
               // navigate to Fees screen
-              Navigator.pushNamed(context, AdminAttendance.routeName);
+              Navigator.pushNamed(context, AdminFees.routeName);
             },
             child: ListTile(
               leading: Icon(
