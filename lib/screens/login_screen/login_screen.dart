@@ -1,8 +1,11 @@
+import 'package:bcrypt/bcrypt.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kta_official/components/custom_buttons.dart';
 import 'package:kta_official/constants.dart';
 import 'package:kta_official/screens/admition_screen/admission_screen.dart';
 import 'package:kta_official/screens/home_screen/home_screen.dart';
+import 'package:http/http.dart' as http;
 
 late bool _passwordVisible;
 
@@ -16,12 +19,22 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   //validate our form now
   final _formKey = GlobalKey<FormState>();
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   // chnages current state
   @override
   void initState() {
     //  TODO: implement initState
     super.initState();
     _passwordVisible = true;
+  }
+
+  void _submitForm() {
+    if (_formKey.currentState!.validate()) {
+      // If the form is valid, call a function to validate the email and password
+      _validateUser(_emailController.text, _passwordController.text);
+    }
   }
 
   @override
@@ -102,11 +115,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           DefaultButton(
                             onPress: () {
-                              if (_formKey.currentState!.validate()) {
-                                //  go to next activity
-                                Navigator.pushNamedAndRemoveUntil(context,
-                                    HomeScreen.routeName, (route) => false);
-                              }
+                              _submitForm();
+                              // if (_formKey.currentState!.validate()) {
+                              //   //  go to next activity
+                              //   // Navigator.pushNamedAndRemoveUntil(context,
+                              //   //     HomeScreen.routeName, (route) => false);
+                              // }
                             },
                             title: "SIGN IN",
                             iconData: Icons.arrow_forward_outlined,
@@ -183,6 +197,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   TextFormField buildEmailField() {
     return TextFormField(
+      controller: _emailController,
       textAlign: TextAlign.start,
       keyboardType: TextInputType.emailAddress,
       style: TextStyle(
@@ -207,6 +222,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   TextFormField buildPasswordField() {
     return TextFormField(
+      controller: _passwordController,
       obscureText: _passwordVisible,
       textAlign: TextAlign.start,
       keyboardType: TextInputType.visiblePassword,
@@ -234,5 +250,55 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       },
     );
+  }
+
+  void _validateUser(String email, String password) async {
+    // Make an API call to your backend server to validate the user's credentials
+    try {
+      final CollectionReference usersCollection =
+          FirebaseFirestore.instance.collection('RegisteredStudents');
+      final QuerySnapshot querySnapshot =
+          await usersCollection.where('email', isEqualTo: email).get();
+      if (querySnapshot.docs.isNotEmpty) {
+        final DocumentSnapshot userDoc = querySnapshot.docs.first;
+        final String hashedPassword = userDoc.get('password');
+        final bool isPasswordCorrect = BCrypt.checkpw(password, hashedPassword);
+        if (isPasswordCorrect) {
+          print("User logged in");
+          // Navigate to the next screen after successful login
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()),
+          );
+        } else {
+          print("Incorrect password");
+          // Show an error message to the user
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Incorrect Password!.'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      } else {
+        print("User not found");
+        // Show an error message to the user
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('User Not Found!.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } catch (error) {
+      print("Failed to login user: $error");
+      // Show an error message to the user
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to login user!.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 }
