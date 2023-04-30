@@ -452,19 +452,19 @@ class _AdmissionScreenState extends State<AdmissionScreen> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       // TODO: Save the form data to a database or send it to an API
-                      // print('First Name: $_name');
-                      // print('Email: $_email');
-                      // print('Phone: $_phone');
-                      // print('whatsapp: $_whatsappNum');
-                      // print('DOB: $_selectedDate');
-                      // print('Age: $_age');
-                      // print('gender: $_selectedGender');
-                      // print('Branch: $_selectedBranch');
-                      // print('Fee: $_selectedFee');
-                      // print('JoiningDate: $_joiningDate');
-                      // print('School Type: $_selectedSchoolType');
-                      // print('School Name: $_schoolName');
-                      // print("Profile Picture : $_profilePic");
+                      print('First Name: $_name');
+                      print('Email: $_email');
+                      print('Phone: $_phone');
+                      print('whatsapp: $_whatsappNum');
+                      print('DOB: $_selectedDate');
+                      print('Age: $_age');
+                      print('gender: $_selectedGender');
+                      print('Branch: $_selectedBranch');
+                      print('Fee: $_selectedFee');
+                      print('JoiningDate: $_joiningDate');
+                      print('School Type: $_selectedSchoolType');
+                      print('School Name: $_schoolName');
+                      print("Profile Picture : $_profilePic");
                       setState(() {
                         isLoading = true;
                       });
