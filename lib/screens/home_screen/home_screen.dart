@@ -204,12 +204,35 @@ class HomeScreen extends StatelessWidget {
                             onPress: () {},
                             icon: 'assets/icons/ask.svg',
                             title: 'New Events'),
-                        HomeCard(
-                            onPress: () {
-
-                            },
-                            icon: "assets/icons/indianRupeeNote.svg",
-                            title: 'Fees'),
+    HomeCard(
+    onPress: () {
+    showModalBottomSheet(
+    context: context,
+    builder: (BuildContext context) {
+    return GestureDetector(
+    onTap: () {
+    Navigator.pop(context);
+    },
+    child: Container(
+    color: Colors.white,
+    height: 100,
+    child: Center(
+    child: Text(
+    "Fee status is currently unknown.",
+    style: TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    ),
+    ),
+    ),
+    ),
+    );
+    },
+    );
+    },
+    icon: "assets/icons/indianRupeeNote.svg",
+    title: 'Fees',
+    ),
                       ],
                     ),
                   ],
