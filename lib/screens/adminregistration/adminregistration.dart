@@ -46,7 +46,7 @@ class ListItemCard extends StatelessWidget {
 }
 
 class Registers extends StatelessWidget {
-  static const String routeName = '/admin-fees';
+  static const String routeName = '/admin-regsiter';
   final List<ListItem> items = [
     ListItem(
       title: 'Personal Class',
