@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:kta_official/main.dart';
+
+import 'feesdetail.dart';
 
 
 
 class FirebaseScreen extends StatelessWidget {
-  final String item;
+  final ListItem item;
 
   FirebaseScreen({required this.item});
 
