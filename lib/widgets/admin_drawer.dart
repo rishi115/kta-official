@@ -49,6 +49,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
               ),
             ),
           ),
+
           GestureDetector(
             onTap: () {
               // navigate to Registered Students screen
@@ -60,7 +61,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
                 color: Colors.black,
               ),
               title: Text(
-                "Registered Students",
+                "Fees Detail",
                 style: TextStyle(color: Colors.black, fontSize: 20),
               ),
             ),
